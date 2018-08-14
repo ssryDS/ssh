@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+       http://www.springframework.org/schema/mvc 
+       http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+
+
+	<!-- 实体，属性 -->
+	<bean id="temo" class="com.hxs.entity.Users">
+		<property name="stname" value="提莫"></property>
+	</bean>
+	<!-- 打印机 -->
+	<bean id="a4" class="com.hxs.entity.impl.A4Paper">
+	</bean>
+	<bean id="b5" class="com.hxs.entity.impl.B5Paper">
+	</bean>
+
+	<bean id="blackInkBox" class="com.hxs.entity.impl.BlackInkBox"></bean>
+	<bean id="colorInkBox" class="com.hxs.entity.impl.ColorInkBox"></bean>
+
+	<bean id="hp" class="com.hxs.entity.Printer">
+		<property name="inkBox" ref="blackInkBox"></property>
+		<property name="Paper" ref="a4"></property>
+
+	</bean>
+
+	<!-- 电脑 -->
+	<bean id="mouse" class="com.hxs.entity.impl.Mouse"></bean>
+	<bean id="keyBoard" class="com.hxs.entity.impl.KeyBoard"></bean>
+	<!--  
+	<bean id="usb1" class="com.hxs.entity.USBInterface1">
+		<property name="device" ref="keyBoard"></property>
+	</bean>
+	<bean id="usb2" class="com.hxs.entity.USBInterface2">
+		<property name="device" ref="mouse"></property>
+	</bean>
+	<bean id="usb3" class="com.hxs.entity.USBInterface3">
+		<property name="device" ref="hp"></property>
+	</bean>
+-->
+	<bean id="shinelon" class="com.hxs.entity.Computer">
+		<property name="usbInterface1" ref="mouse"></property>
+		<property name="usbInterface2" ref="keyBoard"></property>
+		<property name="usbInterface3" ref="hp"></property>
+	</bean>
+
+</beans>
+
+
+
+
+
+
+
+
+
+
