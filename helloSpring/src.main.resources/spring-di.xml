@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+       http://www.springframework.org/schema/mvc 
+       http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+	<!-- 构造注入 
+	<bean id="temo" class="com.hxs.entity.Student">
+		<constructor-arg name="name" value="提莫"/>
+		<constructor-arg name="age" value="10"/>
+		
+	</bean>
+	-->
+	<!-- set注入 -->
+	<bean id="hero" class="com.hxs.entity.Student" scope="prototype">
+		<property name="name" value="阿木木"></property>
+		<property name="age" value="20"></property>
+		<property name="families">
+			<list>
+			<value>爸爸</value>
+			<value>妈妈</value>
+			<value>儿子</value>
+			</list>
+		</property>
+		<property name="hobby">
+		<set>
+			<value>打球</value>
+			<value>看书</value>
+			<value>游泳</value>
+		</set>
+		</property>
+		<property name="t">
+		<props>
+			<prop key="小学">茅坪完小</prop>
+			<prop key="中学">镇中心初中</prop>
+			<prop key="大学">长沙理工大学</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="ud" class="com.hxs.dao.impl.UserDaoImpl"></bean>
+	<bean id="userService" class="com.hxs.service.impl.UserServiceImpl" autowire="byType">
+	
+	</bean>
+</beans>
+
+
+
+
+
+
+
+
+
+
