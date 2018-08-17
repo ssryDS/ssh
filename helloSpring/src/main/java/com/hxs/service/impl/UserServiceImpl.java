@@ -30,10 +30,15 @@ public class UserServiceImpl implements UserService{
 
 
 	//增加关系
-	public void addUser() {
+	public void addUser(String name) {
 		
 		userDao.addUser();
 		
+	}
+	
+	public void delUser(){
+		int n=10/0;
+		System.out.println("删除方法");
 	}
 
 }

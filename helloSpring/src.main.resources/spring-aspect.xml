@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+       http://www.springframework.org/schema/mvc 
+       http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+	<!-- 目标对象 -->
+	<bean id="userDao" class="com.hxs.dao.impl.UserDaoImpl"/>
+	
+	<bean id="userService" class="com.hxs.service.impl.UserServiceImpl">
+	<property name="userDao" ref="userDao"></property>
+	</bean>
+	<bean id="feeder" class="com.hxs.service.impl.Feeder"></bean>
+	
+	<!-- 切面aspect -->
+	<bean id="policeAspect" class="com.hxs.aspect.PoliceAspect"></bean>
+	<bean id="feederAspect" class="com.hxs.aspect.FeederAspect"></bean>
+	
+	
+	<!-- 配置AOP2 -->
+	<aop:config>
+	<!-- 切入点，目标位置 -->
+		<aop:pointcut expression="execution(* com.hxs.service.impl.Feeder.*(..))" id="feederPointCut"/>
+		<!-- 切面 ，切入源-->
+		<aop:aspect ref="feederAspect">
+		
+			<aop:around method="around" pointcut-ref="feederPointCut"/>
+		</aop:aspect>
+	</aop:config>
+	
+	
+	<!-- 配置AOP1 -->
+	<aop:config>
+	
+		<!-- 切入点：做到精确，不然会切入其他代码中？？？ -->
+		<aop:pointcut expression="execution(* com.hxs.service.impl.*.*(..))" id="aPointCut"/>
+		
+		<!-- 切面 -->
+		<aop:aspect ref="policeAspect">
+			<!-- 前置增强 
+			<aop:before method="check" pointcut-ref="aPointCut"/>-->
+			<!-- 后置 
+			<aop:after method="after" pointcut-ref="aPointCut"/>-->
+			<!-- 环绕：可以阻止方法执行 ,代替前置和后置通知
+			<aop:around method="around" pointcut-ref="aPointCut"/>-->
+			<aop:after-throwing method="hasException" pointcut-ref="aPointCut" throwing="ex"/>
+		</aop:aspect>
+		
+	</aop:config>
+
+
+</beans>
+
+
+
+
+
+
+
+
+
+

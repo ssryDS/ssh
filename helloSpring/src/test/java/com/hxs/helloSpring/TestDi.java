@@ -19,11 +19,11 @@ public class TestDi extends TestCase{
 	public void testUser(){
 		ApplicationContext context= new ClassPathXmlApplicationContext("spring-di.xml");
 		UserService us=(UserService) context.getBean("userService");
-		us.addUser();
+		us.addUser("普通人");
 	}
 	public void testauto(){
 		ApplicationContext context= new ClassPathXmlApplicationContext("spring-auto.xml");
 		UserService us=(UserService) context.getBean("userService");
-		us.addUser();
+		us.addUser("罪犯");
 	}
 }
